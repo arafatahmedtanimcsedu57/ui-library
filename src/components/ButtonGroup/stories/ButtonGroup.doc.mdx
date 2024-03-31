@@ -1,0 +1,37 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as ButtonGroupStories from './ButtonGroup.stories';
+
+import './stories.css';
+
+<Meta of={ButtonGroupStories} />
+
+# Button Group
+To trigger an operation.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      There are 3 mode of button group here:
+      - vertical 
+      - block 
+      - justified 
+      
+      <Canvas of={ButtonGroupStories.InVertical} />
+      <Canvas of={ButtonGroupStories.Block} />
+      <Canvas of={ButtonGroupStories.Justified} />
+
+    </div>
+  </div>
+</div>

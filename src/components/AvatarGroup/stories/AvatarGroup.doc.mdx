@@ -1,0 +1,34 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as AvatarGroupStories from './AvatarGroup.stories.tsx';
+
+import './stories.css';
+
+<Meta of={AvatarGroupStories} />
+
+# Avatar Group
+Used to represent users or things, supporting the display of images, icons, or characters.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Space between Avatars
+      <Canvas of={AvatarGroupStories.WithSpacing} />
+
+      Avatars are in stack
+      <Canvas of={AvatarGroupStories.InStack} />
+
+    </div>
+  </div>
+</div>

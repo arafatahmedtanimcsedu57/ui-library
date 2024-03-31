@@ -1,0 +1,51 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as StackStories from './Stack.stories';
+
+import './stories.css';
+
+<Meta of={StackStories} />
+
+# Stack
+A text tip for secondary, which replaces the default title property of an HTML element.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Space between
+      <Canvas of={StackStories.Spacing} /> 
+
+      With divider
+      <Canvas of={StackStories.WithDivider} />  
+
+      Wrap
+      <Canvas of={StackStories.Wrap} />  
+
+      Flex features:
+      > direction
+      >> `row` | `row-reverse` | `column` | `column-reverse`
+      
+      > justifyContent
+      >> `flex-start` | `center` | `flex-end` | `space-between` | `space-around`
+      
+      > alignItems:
+      >> `flex-start` | `center` | `flex-end` | `stretch` | `baseline`
+      
+      
+      Example of `row-reverse`
+      <Canvas of={StackStories.RowReverse}/>
+    </div>
+  </div>
+</div>
+

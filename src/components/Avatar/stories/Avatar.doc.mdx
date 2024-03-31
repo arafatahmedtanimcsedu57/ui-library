@@ -1,0 +1,36 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as AvatarStories from './Avatar.stories.tsx';
+
+import './stories.css';
+
+<Meta of={AvatarStories} />
+
+# Avatar
+Used to represent users or things, supporting the display of images, icons, or characters.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Avatar with image
+      <Canvas of={AvatarStories.WithImage} />
+
+      Avatar with character
+      <Canvas of={AvatarStories.WithCharacter} />
+
+      Circular avatar
+      <Canvas of={AvatarStories.CircularAvatar} />  
+    </div>
+  </div>
+</div>

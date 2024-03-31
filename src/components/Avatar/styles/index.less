@@ -1,0 +1,50 @@
+@import '../../styles/common';
+@import 'mixin';
+
+.bdris-avatar {
+  background-color: var(--bdris-avatar-bg);
+  color: var(--bdris-avatar-text);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  .avatar-md();
+
+  & > .bdris-icon {
+    vertical-align: middle;
+  }
+
+  &-image {
+    &::before {
+      content: attr(alt);
+      position: absolute;
+      width: 100%;
+      height: inherit;
+      top: 0;
+      left: 0;
+      background: var(--bdris-avatar-bg);
+      text-align: center;
+      padding: 0 2px;
+      .ellipsis-basic();
+    }
+  }
+
+  &-circle {
+    border-radius: 50%;
+  }
+
+  &-lg {
+    .avatar-lg();
+  }
+
+  &-sm {
+    .avatar-sm();
+  }
+
+  &-xs {
+    .avatar-xs();
+  }
+}

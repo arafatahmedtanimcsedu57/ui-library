@@ -1,0 +1,22 @@
+.bdris-anim-collapse {
+  display: none;
+
+  &.bdris-anim-in {
+    display: block;
+  }
+
+  tr&.bdris-anim-in {
+    display: table-row;
+  }
+
+  tbody&.bdris-anim-in {
+    display: table-row-group;
+  }
+}
+
+.bdris-anim-collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease, width 0.35s ease, visibility 0.35s ease;
+}

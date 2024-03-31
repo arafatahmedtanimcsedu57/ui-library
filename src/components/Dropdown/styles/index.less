@@ -1,0 +1,355 @@
+@import '../../styles/common.less';
+@import '../../styles/mixins/menu.less';
+@import '../../styles/mixins/combobox.less';
+@import 'mixin.less';
+@import '../../Button/styles/index.less';
+
+//
+// Dropdown menus
+// --------------------------------------------------
+
+.bdris-dropdown-toggle-caret {
+  .combobox-indicator-icon();
+}
+
+// The dropdown wrapper (div)
+.bdris-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; // Make sure dropdown vertical alignment with button,button group and so on.
+
+  &-disabled &-toggle.bdris-btn {
+    cursor: @cursor-disabled !important;
+    box-shadow: none;
+
+    &.bdris-btn-subtle {
+      &,
+      &:focus,
+      &:active {
+        color: var(--bdris-btn-subtle-disabled-text);
+        background: none;
+      }
+    }
+
+    &.bdris-btn-primary {
+      &,
+      &:focus,
+      &:active {
+        opacity: 0.3;
+        background-color: var(--bdris-btn-primary-bg);
+      }
+    }
+
+    &.bdris-btn-link {
+      &,
+      &:focus,
+      &:active {
+        opacity: 0.3;
+        text-decoration: none;
+      }
+    }
+
+    &.bdris-btn-ghost {
+      &,
+      &:focus,
+      &:active {
+        opacity: 0.3;
+      }
+    }
+
+    .bdris-ripple-pond {
+      display: none !important;
+    }
+  }
+}
+
+.bdris-dropdown-toggle {
+  .dropdown-toggle-size();
+
+  &,
+  &.bdris-btn {
+    // Force set style even if has `.btn`.
+    .dropdown-toggle();
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &.bdris-dropdown-toggle-no-caret {
+    padding-right: @padding-x;
+  }
+}
+
+// The dropdown menu (ul)
+.bdris-dropdown-menu {
+  margin: 0; // override default ul
+  list-style: none;
+  font-size: @font-size-base;
+  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  background-color: var(--bdris-bg-overlay);
+  border-radius: @dropdown-menu-radius;
+  padding: @dropdown-menu-padding-y 0;
+  outline: 0;
+
+  &:focus-visible {
+    .focus-ring();
+  }
+
+  .bdris-dropdown & {
+    position: absolute;
+    // dropdown-menu zindex value is greater than dropdown-toggle
+    z-index: @zindex-dropdown + 1;
+    float: left;
+    box-shadow: var(--bdris-dropdown-shadow);
+    outline: none;
+
+    .high-contrast-mode({
+      border: 1px solid var(--bdris-border-primary);
+    });
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// Links within the dropdown menu
+.bdris-dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 6px;
+  padding: @dropdown-item-padding-y @dropdown-item-padding-x;
+  clear: both;
+  font-weight: normal;
+  line-height: @line-height-base;
+  color: var(--bdris-text-primary);
+  white-space: nowrap; // prevent links from randomly breaking onto new lines
+  cursor: pointer; //fixed link has not [href] style
+  .reset-link-text-decoration(none);
+
+  &-content {
+    flex: 1;
+  }
+
+  .bdris-dropdown-item-shortcut {
+    margin-inline-start: 20px;
+    border: none;
+  }
+
+  > .bdris-icon {
+    width: @font-size-base;
+    text-align: center;
+  }
+
+  &&-active {
+    outline: 0;
+    font-weight: bold;
+
+    &,
+    &:hover,
+    &:focus {
+      color: var(--bdris-dropdown-item-text-active);
+      background-color: var(--bdris-dropdown-item-bg-active);
+
+      .bdris-text {
+        color: var(--bdris-dropdown-item-text-active);
+      }
+    }
+  }
+
+  // Hover/Focus state
+  &:focus-visible,
+  &&-focus {
+    .menuitem-active();
+  }
+  &:focus {
+    outline: 0;
+  }
+
+  // Disabled state
+  //
+  // Gray out text and ensure the hover/focus state remains gray
+  &-disabled {
+    color: var(--bdris-text-disabled);
+    cursor: @cursor-disabled;
+    pointer-events: none;
+
+    .bdris-text {
+      color: var(--bdris-text-disabled);
+    }
+
+    // Nuke hover/focus effects
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      background-color: transparent;
+      background-image: none; // Remove CSS gradient
+    }
+  }
+}
+
+.bdris-dropdown-item-divider {
+  .nav-divider(var(--bdris-dropdown-divider));
+}
+
+// The dropdown submenu
+.bdris-dropdown-item-submenu {
+  position: relative;
+
+  &:hover > .bdris-dropdown-item-toggle {
+    .menuitem-active();
+  }
+
+  &.bdris-dropdown-item {
+    position: relative;
+
+    > .bdris-dropdown-item-toggle {
+      .bdris-dropdown-menu-toggle-icon {
+        position: absolute;
+        top: 11px;
+        margin: 0;
+      }
+    }
+
+    > .bdris-dropdown-menu {
+      position: absolute;
+      top: -@dropdown-menu-padding-y;
+    }
+  }
+
+  // Set submenu icon
+  .bdris-dropdown-item& {
+    padding: 0;
+
+    .bdris-dropdown-item-toggle {
+      padding: @dropdown-item-padding-y @dropdown-item-padding-x;
+      padding-right: @dropdown-item-padding-x+ @dropdown-item-submenu-icon-angle-spacing+
+        @dropdown-item-submenu-icon-angle-width;
+    }
+
+    .bdris-dropdown-menu-toggle-icon {
+      right: @dropdown-caret-icon-padding-horizontal;
+    }
+  }
+
+  .bdris-dropdown-menu {
+    left: 100%;
+
+    &[data-direction='start'] {
+      left: unset;
+      right: 100%;
+    }
+  }
+
+  // Open
+  &.bdris-dropdown-item-open > .bdris-dropdown-menu {
+    //use display table to fix-content
+    display: table;
+    animation-name: slideUpIn;
+    animation-play-state: running;
+  }
+}
+
+// Active state
+.bdris-dropdown-menu > .bdris-dropdown-menu-item-focus {
+  outline: 0;
+  background-color: var(--bdris-dropdown-item-bg-active);
+
+  &:hover,
+  &:focus {
+    .menuitem-active();
+  }
+}
+
+// Open state for the dropdown
+.bdris-dropdown-open {
+  > .bdris-dropdown-menu {
+    animation-play-state: running;
+  }
+
+  // Show the menu
+  &.bdris-dropdown-placement-top-start,
+  &.bdris-dropdown-placement-top-end {
+    > .bdris-dropdown-menu {
+      bottom: 100%;
+    }
+  }
+
+  &.bdris-dropdown-placement-left-start,
+  &.bdris-dropdown-placement-left-end {
+    > .bdris-dropdown-menu {
+      right: 100%;
+    }
+  }
+
+  &.bdris-dropdown-placement-right-start,
+  &.bdris-dropdown-placement-right-end {
+    > .bdris-dropdown-menu {
+      left: 100%;
+    }
+  }
+
+  &.bdris-dropdown-placement-bottom-start,
+  &.bdris-dropdown-placement-bottom-end {
+    > .bdris-dropdown-menu {
+      top: 100%;
+    }
+  }
+
+  &.bdris-dropdown-placement-top-start,
+  &.bdris-dropdown-placement-bottom-start {
+    > .bdris-dropdown-menu {
+      left: 0;
+    }
+  }
+
+  &.bdris-dropdown-placement-top-end,
+  &.bdris-dropdown-placement-bottom-end {
+    > .bdris-dropdown-menu {
+      right: 0;
+    }
+  }
+
+  &.bdris-dropdown-placement-left-start,
+  &.bdris-dropdown-placement-right-start {
+    > .bdris-dropdown-menu {
+      top: 0;
+    }
+  }
+
+  &.bdris-dropdown-placement-right-end,
+  &.bdris-dropdown-placement-left-end {
+    > .bdris-dropdown-menu {
+      bottom: 0;
+    }
+  }
+
+  // Remove the outline when :focus is triggered
+  > a {
+    outline: 0;
+  }
+}
+
+// Dropdown section headers
+.bdris-dropdown-header {
+  display: block;
+  padding: @dropdown-item-padding-y @dropdown-item-padding-x;
+  line-height: @line-height-base;
+  color: var(--bdris-dropdown-header-text);
+  border-bottom: 1px solid @dropdown-divider-bg;
+  white-space: nowrap; // as with > li > a
+}
+
+// Opacity not working in Safari,so remove .
+@keyframes slideUpIn {
+  0% {
+    transform-origin: 0% 0%;
+    transform: scaleY(0.8);
+  }
+
+  100% {
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+  }
+}

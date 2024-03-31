@@ -1,0 +1,25 @@
+@import '../../../styles/common';
+
+// Close button
+.bdris-btn-close {
+  border: none;
+  outline: none !important;
+  background: transparent;
+  line-height: 1;
+
+  cursor: pointer;
+
+  .bdris-icon {
+    vertical-align: bottom;
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--bdris-close-button-hover-color);
+
+    svg path {
+      stroke: var(--bdris-close-button-hover-color);
+      stroke-width: 1;
+    }
+  }
+}

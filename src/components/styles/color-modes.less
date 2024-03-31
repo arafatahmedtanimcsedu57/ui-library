@@ -1,0 +1,17 @@
+// Themes
+
+:root,
+.bdris-theme-light {
+  @import 'color-modes/light';
+}
+
+& when (@enable-dark-mode = true) {
+  .bdris-theme-dark {
+    @import 'color-modes/dark';
+  }
+}
+
+// TODO consider adding flag for high-contrast theme
+.bdris-theme-high-contrast {
+  @import 'color-modes/high-contrast';
+}

@@ -1,0 +1,36 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as TextStories from './Text.stories';
+
+import './stories.css';
+
+<Meta of={TextStories} />
+
+# Text
+Basic text writing, including headings, body text, lists, and more.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  {/* <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Trigger dropdown on hover
+      <Canvas of={DropdownStories.TriggerOnHover} />  
+
+      Disabled
+      <Canvas of={DropdownStories.Disabled} />  
+
+      With Icon
+      <Canvas of={DropdownStories.WithIcon} />  
+    </div>
+  </div> */}
+</div>

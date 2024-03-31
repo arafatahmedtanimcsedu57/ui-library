@@ -1,0 +1,39 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as NavbarStories from './Navbar.stories.tsx';
+
+import './stories.css';
+
+<Meta of={NavbarStories} />
+
+# Navbar
+
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      There are 3 types of appearances here:
+      - default 
+      - inverse
+      - subtle 
+
+      By changing the `appearance` prop you can use different styles of the navbar.
+      `appearance` supports a default value (default).
+
+      <Canvas of={NavbarStories.Default} />
+      <Canvas of={NavbarStories.Inverse} />
+      <Canvas of={NavbarStories.Subtle} /> 
+    </div>
+  </div>
+</div>

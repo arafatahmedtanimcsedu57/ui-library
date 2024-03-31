@@ -1,0 +1,36 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as DropdownStories from './Dropdown.stories.tsx';
+
+import './stories.css';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+A dropdown list.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Trigger dropdown on hover
+      <Canvas of={DropdownStories.TriggerOnHover} />  
+
+      Disabled
+      <Canvas of={DropdownStories.Disabled} />  
+
+      With Icon
+      <Canvas of={DropdownStories.WithIcon} />  
+    </div>
+  </div>
+</div>

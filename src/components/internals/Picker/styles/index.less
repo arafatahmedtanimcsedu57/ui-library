@@ -1,0 +1,404 @@
+@import '../../../styles/common.less';
+@import '../../../Button/styles/index.less';
+@import '../../../styles/mixins/listbox.less';
+@import '../../../styles/mixins/combobox.less';
+@import '../../../Stack/styles/index.less';
+@import '../../../Form/styles/mixin.less';
+@import '../../CloseButton/styles/index.less';
+@import '../../../Loader/styles/index.less';
+@import '../../../Input/styles/index.less';
+@import '../../../InputGroup/styles/index.less';
+@import './mixin.less';
+
+//
+// Pickers
+// --------------------------------------------------
+
+// Common styles
+// ----------------------
+.bdris-picker {
+  &-toggle-wrapper {
+    display: inline-block;
+    // Clear whitespace.
+    vertical-align: middle;
+    max-width: 100%;
+  }
+
+  &-toggle.bdris-btn {
+    .bdris-ripple-pond {
+      display: none !important;
+    }
+  }
+
+  &-block {
+    display: block;
+  }
+
+  &-disabled {
+    opacity: @btn-disabled-opacity;
+  }
+
+  &-toggle &-toggle-placeholder {
+    color: var(--bdris-text-secondary);
+  }
+
+  &-has-value .bdris-btn &-toggle-value,
+  &-has-value &-toggle &-toggle-value {
+    color: var(--bdris-picker-value);
+  }
+
+  // empty listbox
+  &-none {
+    padding: @picker-none-padding;
+    color: var(--bdris-text-secondary);
+    cursor: default;
+  }
+
+  &-countable &-toggle-value {
+    display: flex;
+  }
+
+  &-value-list {
+    flex: 0 1 auto;
+    .ellipsis-basic();
+    .ie11-max-width(100%);
+  }
+
+  &-value-count {
+    margin: 0 @picker-value-count-margin;
+    background-color: var(--bdris-picker-count-bg);
+    color: var(--bdris-picker-count-text);
+    border-radius: @picker-value-count-border-radius;
+    padding: 0 @picker-value-count-padding;
+    line-height: @line-height-computed;
+  }
+
+  &-value-separator {
+    margin: 0 4px 0 0;
+  }
+
+  &:not(.bdris-picker-disabled):hover,
+  &.bdris-picker-focused {
+    border-color: var(--bdris-input-focus-border);
+  }
+
+  &-toggle-active,
+  &.bdris-picker-focused {
+    box-shadow: var(--bdris-state-focus-shadow);
+  }
+
+  &-label.bdris-input-group-addon {
+    color: var(--bdris-text-primary);
+    padding-right: 4px !important;
+  }
+
+  &-loader {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  &-error > .bdris-input-group {
+    border-color: var(--bdris-state-error) !important;
+
+    &:focus-within {
+      outline: var(--bdris-state-error-outline) !important;
+    }
+  }
+}
+
+.bdris-picker-toggle {
+  // TODO: Should inherit from <Input> styles?
+  .bdris-btn();
+
+  .bdris-picker-default & {
+    @padding-vertical: (@padding-y - @picker-default-toggle-border-width);
+    @padding-horizontal: (@padding-x - @picker-default-toggle-border-width);
+
+    padding: @padding-vertical @padding-horizontal;
+  }
+
+  &-textbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 1px solid #0000;
+    padding-left: 10px;
+    padding-right: 32px;
+    color: var(--bdris-text-primary);
+    background-color: var(--bdris-input-bg);
+    outline: none;
+  }
+
+  &.bdris-btn-lg &-textbox {
+    padding-left: 14px;
+  }
+
+  &.bdris-btn-sm &-textbox {
+    padding-left: 8px;
+  }
+
+  &.bdris-btn-xs &-textbox {
+    padding-left: 6px;
+  }
+
+  &-read-only {
+    opacity: 0;
+  }
+}
+
+.bdris-picker-toggle {
+  .bdris-picker-default & {
+    transition: @picker-transition;
+
+    .high-contrast-mode({
+      transition: none;
+    });
+  }
+
+  .bdris-picker-default:not(.bdris-picker-disabled) & {
+    &:hover,
+    &:focus,
+    &-active {
+      border-color: var(--bdris-input-focus-border);
+    }
+  }
+
+  .bdris-picker-subtle & {
+    .bdris-btn-subtle();
+
+    transition: none;
+
+    &-active {
+      background-color: var(--bdris-btn-subtle-hover-bg);
+      color: var(--bdris-btn-subtle-hover-text);
+    }
+  }
+}
+
+/* stylelint-disable-next-line */ // Custom button sizes
+.bdris-picker-toggle.bdris-btn {
+  .picker-button-caret-md();
+  .date-picker-button-caret-md();
+  .date-picker-button-size(base);
+
+  &-lg {
+    .picker-button-caret-lg();
+    .picker-default-button-reset-padding-left(large);
+    .date-picker-button-caret-lg();
+    .date-picker-button-size(large);
+
+    .button-size-lg();
+
+    .bdris-picker-value-count {
+      line-height: @line-height-large-computed;
+    }
+  }
+
+  &-md {
+    .picker-button-caret-md();
+    .picker-default-button-reset-padding-left(base);
+    .date-picker-button-caret-md();
+    .date-picker-button-size(base);
+  }
+
+  &-sm {
+    .button-size-sm();
+
+    .picker-button-caret-sm();
+    .picker-default-button-reset-padding-left(small);
+    .date-picker-button-caret-sm();
+    .date-picker-button-size(small);
+  }
+
+  &-xs {
+    .button-size-xs();
+
+    .picker-button-caret-xs();
+    .picker-default-button-reset-padding-left(extra-small);
+    .date-picker-button-caret-xs();
+    .date-picker-button-size(extra-small);
+  }
+}
+
+/* stylelint-disable-next-line */ // Custom button
+.bdris-picker-toggle {
+  .picker-default-toggle();
+  .picker-subtle-toggle();
+
+  &.bdris-btn {
+    width: 100%;
+    text-align: left;
+  }
+
+  .ellipsis();
+
+  &-label {
+    color: var(--bdris-text-primary);
+
+    &::after {
+      content: ':';
+      margin: 0 4px 0 2px;
+    }
+  }
+
+  &-value {
+    display: block;
+    .ellipsis();
+  }
+
+  .bdris-picker-cleanable.bdris-picker-has-value & {
+    padding-right: (@dropdown-toggle-padding-right + @picker-toggle-clean-width);
+  }
+}
+
+.bdris-picker-toggle-indicator {
+  // Picker clear button
+  .bdris-picker-clean {
+    .combobox-indicator-icon(@picker-toggle-clean-right);
+
+    background: inherit;
+    color: var(--bdris-text-secondary);
+    transition: 0.2s color linear;
+    cursor: pointer;
+
+    &.bdris-btn-close {
+      padding: 4px 0;
+    }
+
+    .bdris-@{date-picker-prefix} &,
+    .bdris-@{date-range-picker-prefix} & {
+      right: (@picker-toggle-clean-right + @picker-item-content-padding-vertical);
+    }
+  }
+
+  // Picker toggle caret
+  .bdris-picker-caret-icon {
+    // Extend  Dropdown toggle caret style
+    .combobox-indicator-icon();
+
+    color: var(--bdris-text-secondary);
+  }
+
+  .bdris-picker-loader {
+    .combobox-indicator-icon();
+  }
+}
+
+// Picker Menu
+.bdris-picker-popup {
+  position: absolute;
+  text-align: left;
+  z-index: @zindex-picker-popup;
+  border-radius: @border-radius;
+  background-color: var(--bdris-bg-overlay);
+  box-shadow: var(--bdris-shadow-overlay);
+  overflow: hidden;
+  // Remove transition
+  transition: none;
+  display: flex;
+  flex-direction: column;
+  padding: @border-radius 0;
+
+  .high-contrast-mode({
+    border: 1px solid var(--bdris-border-primary);
+  });
+
+  // Increase z-index when modal opened.
+  .bdris-modal-open & {
+    z-index: (@zindex-modal + @zindex-picker-toggle);
+  }
+
+  // Increase z-index when drawer opened.
+  .bdris-drawer-open & {
+    z-index: (@zindex-drawer + @zindex-picker-toggle);
+  }
+
+  &.bdris-picker-inline {
+    position: relative;
+    box-shadow: none;
+  }
+
+  .bdris-search-box {
+    padding: (@picker-menu-padding - @border-radius) @picker-menu-padding
+      (@picker-menu-padding - @border-radius);
+  }
+}
+
+// Make sure styles the same with <Input>
+.bdris-picker-default,
+.bdris-picker-input {
+  .bdris-btn,
+  .bdris-picker-toggle {
+    background-color: var(--bdris-input-bg) !important;
+  }
+
+  &.bdris-picker-disabled .bdris-picker-toggle,
+  &.bdris-picker-disabled .bdris-btn {
+    background-color: var(--bdris-input-disabled-bg) !important;
+  }
+}
+
+// Check Item
+.bdris-check-item {
+  display: block;
+
+  &:not(.bdris-checkbox-disabled):hover,
+  &:focus,
+  &&-focus {
+    .listbox-option-active();
+
+    .high-contrast-mode({
+      .bdris-check-tree-node-text-wrapper {
+        text-decoration: underline;
+      }
+    });
+  }
+
+  .bdris-checkbox-checker {
+    padding: 0;
+
+    > label {
+      position: relative;
+      cursor: pointer;
+      display: block;
+      padding: @picker-item-content-padding-vertical @picker-item-content-padding-horizontal
+        @picker-item-content-padding-vertical @picker-check-item-content-padding-left;
+      line-height: @line-height-computed;
+
+      .high-contrast-mode({
+        transition: none;
+      });
+
+      &::before {
+        background-color: var(--bdris-bg-overlay);
+
+        .high-contrast-mode({
+          background: none;
+        });
+      }
+
+      .bdris-checkbox-disabled& {
+        cursor: not-allowed;
+      }
+
+      .grouped &,
+      .@{ckpns}-menu-group-children & {
+        padding-left: @picker-check-item-content-padding-left +
+          @picker-children-check-item-padding-left;
+      }
+    }
+
+    .bdris-checkbox-control {
+      left: @picker-item-content-padding-horizontal;
+
+      .grouped &,
+      .@{ckpns}-menu-group-children & {
+        left: (@picker-item-content-padding-horizontal + @picker-children-check-item-padding-left);
+      }
+    }
+  }
+}

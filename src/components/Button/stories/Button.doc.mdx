@@ -1,0 +1,72 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as ButtonStories from './Button.stories.tsx';
+
+import './stories.css';
+
+<Meta of={ButtonStories} />
+
+# Button
+To trigger an operation.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      There are 5 types of appearances here:
+      - default 
+      - primary 
+      - link 
+      - subtle 
+      - ghost
+
+      
+      By changing the `appearance` prop you can use different styles of the button.
+      `appearance` supports a default value (default).
+
+      <Canvas of={ButtonStories.Appearance} />
+
+      Buttons in different status
+      - loading
+      - active
+      - disabled
+
+      <Canvas of={ButtonStories.Disabled} />
+      <Canvas of={ButtonStories.Loading} />
+      <Canvas of={ButtonStories.Active} />
+
+    </div>
+  </div>
+
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Design system supports a default button size as well as a large, medium, small and tiny size.
+      If a large, medium, small or tiny button is desired, set the `size` property to either `lg` , `md`, `sm` or `xs` respectively.
+
+      Omit the `size` property for a button with the default size(`md`).
+
+      <Canvas of={ButtonStories.Size} />
+
+    </div>
+
+    <div className="story-card-ex">
+      Buttons in different colors
+      <Canvas of={ButtonStories.Color} />
+    </div>
+
+     <div className="story-card-ex">
+      With icon
+      <Canvas of={ButtonStories.WithIcons} />
+    </div>
+  </div>
+</div>

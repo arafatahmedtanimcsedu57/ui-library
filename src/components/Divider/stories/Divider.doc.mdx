@@ -1,0 +1,32 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as DividerStories from './Divider.stories';
+
+import './stories.css';
+
+<Meta of={DividerStories} />
+
+# Divider
+A divider line separates different content.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Divider with text
+      <Canvas of={DividerStories.WithText} />
+      <Canvas of={DividerStories.Vertical} />
+      <Canvas of={DividerStories.VerticalDivider} />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+// Rules that take effect in dark mode.
+.dark-mode(@rules) {
+  & when (@enable-dark-mode = true) {
+    .bdris-theme-dark & {
+      @rules();
+    }
+  }
+}
+
+.high-contrast-mode(@rules) {
+  .bdris-theme-high-contrast & {
+    @rules();
+  }
+}
