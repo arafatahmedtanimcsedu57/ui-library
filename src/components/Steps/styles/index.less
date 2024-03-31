@@ -1,0 +1,264 @@
+@import '../../styles/common';
+
+//
+// Steps
+// --------------------------------------------------
+.bdris-steps {
+  min-height: @steps-icon-diameter;
+}
+
+// Item
+// --------------------------
+.bdris-steps-item {
+//   padding-left: @steps-icon-space-width;
+  position: relative;
+  overflow: hidden;
+}
+
+// Item icon
+.bdris-steps-item-icon-wrapper {
+  width: @steps-icon-diameter;
+  height: @steps-icon-diameter;
+  text-align: center;
+  font-size: @steps-icon-size;
+  line-height: @steps-icon-line-height;
+  color: var(--bdris-text-secondary);
+//   position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--bdris-steps-border);
+  border-radius: 50%;
+
+  // Finish status show check mark.
+  .bdris-steps-item-status-finish & {
+    border-color: var(--bdris-steps-state-finish);
+    color: var(--bdris-steps-state-finish);
+  }
+
+  // Error status show X mark.
+  .bdris-steps-item-status-error & {
+    border-color: var(--bdris-steps-state-error);
+    color: var(--bdris-steps-state-error);
+  }
+
+  .bdris-steps-item-status-process & {
+    border-color: var(--bdris-steps-state-process);
+    background-color: var(--bdris-steps-state-process);
+    color: var(--bdris-text-inverse);
+
+    .bdris-icon {
+      color: var(--bdris-steps-icon-state-process);
+    }
+  }
+
+  &.bdris-steps-item-custom-icon {
+    border: none;
+    background: none;
+  }
+
+  // Icon content
+  > .bdris-steps-item-icon {
+    width: 100%;
+    display: block;
+    text-align: center;
+    position: relative;
+
+    .bdris-icon {
+      font-size: 14px;
+      vertical-align: middle;
+    }
+  }
+}
+
+// Item content
+// --------------------------
+.bdris-steps-item-content {
+  color: var(--bdris-text-secondary);
+  display: inline-block;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+
+  // Change static to relative, Make `z-index` more than Tail line
+  position: relative;
+  width: 100%;
+
+  .bdris-steps-item-status-process & {
+    color: var(--bdris-text-primary);
+  }
+
+  .bdris-steps-item-status-error & {
+    color: var(--bdris-text-error);
+  }
+}
+
+// Item title
+.bdris-steps-item-title {
+  position: relative;
+  font-size: @steps-title-font-size;
+  line-height: @steps-title-line-height;
+  min-height: @steps-title-font-size;
+//   padding-right: @steps-icon-spacing;
+  display: inline-block;
+
+  &:empty {
+    padding-right: 0;
+  }
+}
+
+// Item description
+.bdris-steps-item-description {
+  margin-top: @steps-description-margin-top;
+}
+
+.bdris-steps-item-tail,
+.bdris-steps-item-title::after {
+  position: absolute;
+  border-color: var(--bdris-steps-border);
+
+  .bdris-steps-item-status-process & {
+    border-color: var(--bdris-steps-border);
+  }
+
+  .bdris-steps-item-status-finish & {
+    border-color: var(--bdris-steps-state-finish);
+  }
+
+  .bdris-steps-next-error & {
+    border-color: var(--bdris-steps-border-state-error);
+  }
+}
+
+// Horizontal
+.bdris-steps-horizontal {
+  display: flex;
+  justify-content: space-between;
+
+  .bdris-steps-item {
+    // display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: @steps-icon-diameter;
+
+    // The last node is self-adaptive width.
+    // &:last-child {
+    //   flex-grow: 0;
+    //   flex-shrink: 0;
+
+    //   // The last item hidden tail line
+    //   .bdris-steps-item-title::after {
+    //     display: none;
+    //   }
+    // }
+
+    // // There is a 10px spacing between each item.
+    // &:not(:first-child) {
+    // //   padding-left: (@steps-icon-space-width + @steps-item-spacing);
+
+    //   .bdris-steps-item-icon-wrapper {
+    //     // left: @steps-item-spacing;
+    //   }
+    // }
+  }
+
+  .bdris-steps-item-content {
+    height: (@steps-title-font-size * @steps-title-line-height);
+  }
+
+  .bdris-steps-item-title {
+    flex: 1;
+    
+    &::after {
+      content: '';
+      top: (@steps-icon-diameter / 2);
+      left: 100%;
+      width: 9999px;
+    //   border-top-width: 1px;
+      border-top-style: solid;
+      background-color: red;
+      height: 2px;
+    }
+
+    &::before {
+        content: '';
+        top: (@steps-icon-diameter / 2);
+        left: 100%;
+        width: 9999px;
+        // border-top-width: 1px;
+        border-top-style: solid;
+        background-color: red;
+        height: 2px;
+      }
+  }
+}
+
+// Verticla
+.bdris-steps-vertical {
+  .bdris-steps-item {
+    padding-bottom: 20px;
+
+    // There is a 10px spacing between each item.
+    &:not(:first-child) {
+      margin-top: @steps-item-spacing;
+    }
+
+    &:last-child .bdris-steps-item-tail {
+      display: none;
+    }
+  }
+
+  .bdris-steps-item-tail {
+    top: @steps-icon-space-width;
+    bottom: 0;
+    // left: (@steps-icon-diameter / 2);
+    border-left-width: 1px;
+    border-left-style: solid;
+  }
+}
+
+// Small
+// Resize: Diameter、font-size and so on.
+.bdris-steps-small {
+  min-height: @small-steps-icon-diameter;
+
+  &.bdris-steps-horizontal .bdris-steps-item {
+    min-height: @small-steps-icon-diameter;
+  }
+
+  &.bdris-steps-horizontal .bdris-steps-item:not(:first-child) {
+    // padding-left: (@small-steps-icon-space-width + @steps-icon-spacing);
+  }
+
+  &.bdris-steps-vertical .bdris-steps-item-tail {
+    left: (@small-steps-icon-diameter / 2);
+  }
+
+  &.bdris-steps-horizontal .bdris-steps-item-title::after {
+    top: 12px;
+  }
+
+  .bdris-steps-item {
+    // padding-left: @small-steps-icon-space-width;
+  }
+
+  .bdris-steps-item-icon-wrapper {
+    width: @small-steps-icon-diameter;
+    height: @small-steps-icon-diameter;
+    font-size: @small-steps-icon-size;
+    line-height: @small-steps-icon-line-height;
+  }
+
+  .bdris-steps-item-title {
+    font-size: @small-steps-icon-size;
+    line-height: @small-steps-title-line-height;
+  }
+
+  .bdris-steps-item-description {
+    margin-top: @small-steps-description-margin-top;
+    font-size: @small-steps-description-font-size;
+    line-height: @small-steps-description-line-height;
+  }
+}
