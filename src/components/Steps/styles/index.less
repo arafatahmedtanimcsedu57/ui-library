@@ -10,7 +10,7 @@
 // Item
 // --------------------------
 .bdris-steps-item {
-//   padding-left: @steps-icon-space-width;
+  padding-left: @steps-icon-space-width;
   position: relative;
   overflow: hidden;
 }
@@ -22,13 +22,13 @@
   text-align: center;
   font-size: @steps-icon-size;
   line-height: @steps-icon-line-height;
-  color: var(--bdris-text-secondary);
-//   position: absolute;
+  color: #EAECF0;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
-  border: 1px solid var(--bdris-steps-border);
+  border: 2px solid #EAECF0;
   border-radius: 50%;
 
   // Finish status show check mark.
@@ -45,8 +45,8 @@
 
   .bdris-steps-item-status-process & {
     border-color: var(--bdris-steps-state-process);
-    background-color: var(--bdris-steps-state-process);
-    color: var(--bdris-text-inverse);
+    color: var(--bdris-steps-state-process);
+    // color: var(--bdris-text-inverse);
 
     .bdris-icon {
       color: var(--bdris-steps-icon-state-process);
@@ -64,6 +64,20 @@
     display: block;
     text-align: center;
     position: relative;
+    
+    &.bdris-steps-item-icon-process{ 
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &.bdris-steps-item-icon-wait{ 
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .bdris-icon {
       font-size: 14px;
@@ -77,11 +91,6 @@
 .bdris-steps-item-content {
   color: var(--bdris-text-secondary);
   display: inline-block;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-
-
   // Change static to relative, Make `z-index` more than Tail line
   position: relative;
   width: 100%;
@@ -99,9 +108,10 @@
 .bdris-steps-item-title {
   position: relative;
   font-size: @steps-title-font-size;
+  font-weight: var(--bdris-text-weight-semibold);
   line-height: @steps-title-line-height;
   min-height: @steps-title-font-size;
-//   padding-right: @steps-icon-spacing;
+  padding-right: @steps-icon-spacing;
   display: inline-block;
 
   &:empty {
@@ -109,9 +119,19 @@
   }
 }
 
+.bdris-steps-item-title-process{
+  color: @primary-color
+}
+
 // Item description
 .bdris-steps-item-description {
-  margin-top: @steps-description-margin-top;
+  // margin-top: @steps-description-margin-top;
+  font-size: @steps-title-font-size;
+  font-weight: var(--bdris-text-weight-regular);
+}
+
+.bdris-steps-item-description-process{
+  color: @primary-color
 }
 
 .bdris-steps-item-tail,
@@ -120,7 +140,7 @@
   border-color: var(--bdris-steps-border);
 
   .bdris-steps-item-status-process & {
-    border-color: var(--bdris-steps-border);
+    border-color: #EAECF0;
   }
 
   .bdris-steps-item-status-finish & {
@@ -138,30 +158,29 @@
   justify-content: space-between;
 
   .bdris-steps-item {
-    // display: flex;
     flex-grow: 1;
     flex-shrink: 1;
     min-height: @steps-icon-diameter;
 
     // The last node is self-adaptive width.
-    // &:last-child {
-    //   flex-grow: 0;
-    //   flex-shrink: 0;
+    &:last-child {
+      flex-grow: 0;
+      flex-shrink: 0;
 
-    //   // The last item hidden tail line
-    //   .bdris-steps-item-title::after {
-    //     display: none;
-    //   }
-    // }
+      // The last item hidden tail line
+      .bdris-steps-item-title::after {
+        display: none;
+      }
+    }
 
-    // // There is a 10px spacing between each item.
-    // &:not(:first-child) {
-    // //   padding-left: (@steps-icon-space-width + @steps-item-spacing);
+    // There is a 10px spacing between each item.
+    &:not(:first-child) {
+      padding-left: (@steps-icon-space-width + @steps-item-spacing);
 
-    //   .bdris-steps-item-icon-wrapper {
-    //     // left: @steps-item-spacing;
-    //   }
-    // }
+      .bdris-steps-item-icon-wrapper {
+        left: @steps-item-spacing;
+      }
+    }
   }
 
   .bdris-steps-item-content {
@@ -169,29 +188,14 @@
   }
 
   .bdris-steps-item-title {
-    flex: 1;
-    
     &::after {
       content: '';
       top: (@steps-icon-diameter / 2);
       left: 100%;
       width: 9999px;
-    //   border-top-width: 1px;
+      border-top-width: 2px;
       border-top-style: solid;
-      background-color: red;
-      height: 2px;
     }
-
-    &::before {
-        content: '';
-        top: (@steps-icon-diameter / 2);
-        left: 100%;
-        width: 9999px;
-        // border-top-width: 1px;
-        border-top-style: solid;
-        background-color: red;
-        height: 2px;
-      }
   }
 }
 
@@ -213,7 +217,7 @@
   .bdris-steps-item-tail {
     top: @steps-icon-space-width;
     bottom: 0;
-    // left: (@steps-icon-diameter / 2);
+    left: (@steps-icon-diameter / 2);
     border-left-width: 1px;
     border-left-style: solid;
   }
@@ -229,7 +233,7 @@
   }
 
   &.bdris-steps-horizontal .bdris-steps-item:not(:first-child) {
-    // padding-left: (@small-steps-icon-space-width + @steps-icon-spacing);
+    padding-left: (@small-steps-icon-space-width + @steps-icon-spacing);
   }
 
   &.bdris-steps-vertical .bdris-steps-item-tail {
@@ -241,7 +245,7 @@
   }
 
   .bdris-steps-item {
-    // padding-left: @small-steps-icon-space-width;
+    padding-left: @small-steps-icon-space-width;
   }
 
   .bdris-steps-item-icon-wrapper {
@@ -257,7 +261,6 @@
   }
 
   .bdris-steps-item-description {
-    margin-top: @small-steps-description-margin-top;
     font-size: @small-steps-description-font-size;
     line-height: @small-steps-description-line-height;
   }

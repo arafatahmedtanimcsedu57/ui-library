@@ -1,0 +1,50 @@
+import {
+  Meta,
+  Primary,
+  Source,
+  Controls,
+  Story,
+  Canvas,
+} from '@storybook/blocks';
+import * as StepsStories from './Steps.stories';
+
+import './stories.css';
+
+<Meta of={StepsStories} />
+
+# Steps
+A navigation bar that guides users through the steps of a task.
+
+<Primary />
+<Controls />
+
+## Examples
+
+<div className="story-layout-ex">
+  <div className="story-layout-ex--section">
+    <div className="story-card-ex">
+      Steps with title and description
+      <Canvas of={StepsStories.WithTitleAndDescription} />
+    </div>
+
+    <div className="story-card-ex">
+      Steps with custom icon
+      <Canvas of={StepsStories.WithCustomIcon} />
+    </div>
+ 
+    <div className="story-card-ex">
+      Small steps
+      <Canvas of={StepsStories.Small} />
+    </div>
+
+    <div className="story-card-ex">
+      Vertical steps
+      <Canvas of={StepsStories.Vertical} />
+    </div>
+
+    <div className="story-card-ex">
+      Steps in error state
+      <Canvas of={StepsStories.Error} />
+    </div>
+  </div>
+</div>
